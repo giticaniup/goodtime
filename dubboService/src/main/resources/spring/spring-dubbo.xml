@@ -1,4 +1,4 @@
-<?xml version= "1.0" encoding ="UTF-8" ?>
+<?xml version= "1.0" encoding ="GBK" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -14,9 +14,9 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!-- æ¶ˆè´¹æ–¹åº”ç”¨åï¼Œç”¨äºŽè®¡ç®—ä¾èµ–å…³ç³»ï¼Œä¸æ˜¯åŒ¹é…æ¡ä»¶ï¼Œä¸è¦ä¸Žæä¾›æ–¹ä¸€æ · -->
+    <!-- Ïû·Ñ·½Ó¦ÓÃÃû£¬ÓÃÓÚ¼ÆËãÒÀÀµ¹ØÏµ£¬²»ÊÇÆ¥ÅäÌõ¼þ£¬²»ÒªÓëÌá¹©·½Ò»Ñù -->
     <dubbo:application name="goodtime"/>
-    <!-- ä½¿ç”¨multicastå¹¿æ’­æ³¨å†Œä¸­å¿ƒæš´éœ²å‘çŽ°æœåŠ¡åœ°å€ -->
+    <!-- Ê¹ÓÃmulticast¹ã²¥×¢²áÖÐÐÄ±©Â¶·¢ÏÖ·þÎñµØÖ· -->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <!-- dubbo provider -->
@@ -24,22 +24,22 @@
 
     <dubbo:protocol name="dubbo" port="10880"/>
 
-    <!--æ³¨å†ŒdubboæœåŠ¡
-    1.æ³¨å†Œå®žçŽ°ç±»çš„bean
-    2.æ³¨å†Œdubboservice-->
+    <!--×¢²ádubbo·þÎñ
+    1.×¢²áÊµÏÖÀàµÄbean
+    2.×¢²ádubboservice-->
 
 
     <dubbo:service interface="com.kode.api.DemoService" ref="demoService"/>
-    <dubbo:service interface="com.github.goodtime.service.UserInfoService" ref="userInfoService"/>
+    <dubbo:service interface="com.github.api.service.UserInfoService" ref="userInfoService"/>
 
     <context:annotation-config/>
 
-    <!-- è‡ªåŠ¨æ‰«æservice -->
+    <!-- ×Ô¶¯É¨Ãèservice -->
     <context:component-scan base-package="com.github.provider">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--æ—¥å¿—è®°å½•é…ç½®-->
+    <!--ÈÕÖ¾¼ÇÂ¼ÅäÖÃ-->
     <bean id="logAspect" class="com.github.common.aspect.LogAspect"/>
 
     <aop:config>
@@ -50,7 +50,7 @@
         </aop:aspect>
     </aop:config>
 
-    <!--ä½¿ç”¨Gsonè¿›è¡Œjsonè½¬æ¢-->
+    <!--Ê¹ÓÃGson½øÐÐjson×ª»»-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -60,13 +60,13 @@
         </property>
     </bean>
 
-    <!--å¼•å…¥é…ç½®æ–‡ä»¶-->
+    <!--ÒýÈëÅäÖÃÎÄ¼þ-->
     <bean id="propertyConfigurer"
           class="com.github.common.util.EncryptPropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
-    <!--é…ç½®dataSource-->
+    <!--ÅäÖÃdataSource-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}"/>
         <property name="url" value="${database.url}"/>
@@ -74,25 +74,25 @@
         <property name="password" value="${database.password}"/>
     </bean>
 
-    <!--æ•´åˆSpringå’ŒMyBatis-->
+    <!--ÕûºÏSpringºÍMyBatis-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:/mapper/UserMapper.xml"/>
     </bean>
-    <!--é…ç½®mybatisæ‰«æçš„åŒ…-->
+    <!--ÅäÖÃmybatisÉ¨ÃèµÄ°ü-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.github.provider.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-    <!-- å¯¹æ ‡æ³¨@Transactionalæ³¨è§£çš„Beanè¿›è¡ŒåŠ å·¥å¤„ç†ï¼Œä»¥ç»‡å…¥äº‹åŠ¡ç®¡ç†åˆ‡é¢ -->
-    <!-- é»˜è®¤æƒ…å†µä¸‹ï¼Œ<tx:annotation-drivençš„transaction-managerçš„å€¼ä¸ºtransactionManagerï¼Œ
-    å› è€Œæ­¤å¤„å¯ç›´æŽ¥ç®€åŒ–ä¸º <tx:annotation-driven/>-->
+    <!-- ¶Ô±ê×¢@Transactional×¢½âµÄBean½øÐÐ¼Ó¹¤´¦Àí£¬ÒÔÖ¯ÈëÊÂÎñ¹ÜÀíÇÐÃæ -->
+    <!-- Ä¬ÈÏÇé¿öÏÂ£¬<tx:annotation-drivenµÄtransaction-managerµÄÖµÎªtransactionManager£¬
+    Òò¶ø´Ë´¦¿ÉÖ±½Ó¼ò»¯Îª <tx:annotation-driven/>-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!-- äº‹åŠ¡å¢žå¼º -->
+    <!-- ÊÂÎñÔöÇ¿ -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <!--äº‹åŠ¡å±žæ€§å®šä¹‰  -->
+        <!--ÊÂÎñÊôÐÔ¶¨Òå  -->
         <tx:attributes>
             <!--            <tx:method name="get*" read-only="false"/>
                        <tx:method name="save*" rollback-for="Exception"/>
@@ -100,10 +100,10 @@
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-    <!-- å¯¹æœåŠ¡å±‚çš„ç±»æä¾›äº‹åŠ¡æ”¯æŒ -->
+    <!-- ¶Ô·þÎñ²ãµÄÀàÌá¹©ÊÂÎñÖ§³Ö -->
     <aop:config proxy-target-class="true">
         <aop:pointcut id="serviceMethod" expression="execution(* com.github.provider.service.*.*(..))"/>
-        <!-- å¼•ç”¨äº‹åŠ¡å¢žå¼º -->
+        <!-- ÒýÓÃÊÂÎñÔöÇ¿ -->
         <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
     </aop:config>
 

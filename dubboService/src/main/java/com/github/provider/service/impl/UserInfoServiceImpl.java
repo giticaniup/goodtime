@@ -1,8 +1,8 @@
 package com.github.provider.service.impl;
 
 
-import com.github.goodtime.service.UserInfoService;
-import com.github.provider.entity.User;
+import com.github.api.entity.User;
+import com.github.api.service.UserInfoService;
 import com.github.provider.dao.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +24,15 @@ public class UserInfoServiceImpl implements UserInfoService{
     private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     public User userTest() {
-        User user = new User();
-        user.setUserId(2);
-        user.setAge(22);
-        user.setBirthday(new Date());
-        user.setGender(0);
-        user.setName("lbq");
-        user.setPassword("11");
-        user.setUserName("lbq");
-        userMapper.insert(user);
+//        User user = new User();
+//        user.setUserId(2);
+//        user.setAge(22);
+//        user.setBirthday(new Date());
+//        user.setGender(0);
+//        user.setName("lbq");
+//        user.setPassword("11");
+//        user.setUserName("lbq");
+//        userMapper.insert(user);
         //throw new RuntimeException();
         return userMapper.selectByPrimaryKey(1);
     }

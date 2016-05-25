@@ -1,6 +1,6 @@
 package com.github.provider.dao;
 
-import com.github.provider.entity.User;
+import com.github.api.entity.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);

@@ -4,20 +4,20 @@
       "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
      
     <generatorConfiguration>
-      <classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+      <classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.2\mysql-connector-java-5.1.2.jar" />
     <context id="mysql" targetRuntime="MyBatis3">
       <commentGenerator>
         <property name="suppressAllComments" value="true"/>
       </commentGenerator>
       <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-            connectionURL="jdbc:mysql://127.0.0.1/goodtime?useUnicode=true&amp;characterEncoding=UTF-8"
+            connectionURL="jdbc:mysql://127.0.0.1/goodtime?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"
             userId="root" password="">
         </jdbcConnection>
       <javaTypeResolver>
          <property name="forceBigDecimals" value="false"/>
       </javaTypeResolver>
       
-      <javaModelGenerator targetPackage="com.github.provider.entity" targetProject="src/main/java">
+      <javaModelGenerator targetPackage="com.github.api.entity" targetProject="../api/src/main/java">
           <property name="enableSubPackages" value="true"/>
           <property name="trimStrings" value="true"/>
       </javaModelGenerator>

@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class Test {
     public static void  main(String[] args ) throws IOException {
-        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext(new String[]{"spring/spring-dubbo.xml"});
         context.start();
         System.out.println("press any key to exit");
         System.in.read();

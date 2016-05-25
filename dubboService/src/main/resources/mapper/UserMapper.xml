@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.github.provider.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.github.provider.entity.User" >
+  <resultMap id="BaseResultMap" type="com.github.api.entity.User" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     delete from gd_user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.github.provider.entity.User" >
+  <insert id="insert" parameterType="com.github.api.entity.User" >
     insert into gd_user (user_id, user_name, name, 
       password, age, birthday, 
       gender)
@@ -31,7 +31,7 @@
       #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
       #{gender,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.github.provider.entity.User" >
+  <insert id="insertSelective" parameterType="com.github.api.entity.User" >
     insert into gd_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.github.provider.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.api.entity.User" >
     update gd_user
     <set >
       <if test="userName != null" >
@@ -104,7 +104,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.github.provider.entity.User" >
+  <update id="updateByPrimaryKey" parameterType="com.github.api.entity.User" >
     update gd_user
     set user_name = #{userName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

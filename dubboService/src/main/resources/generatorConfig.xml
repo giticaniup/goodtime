@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!DOCTYPE generatorConfiguration 
+    <!DOCTYPE generatorConfiguration
       PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
       "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-     
+
     <generatorConfiguration>
-      <classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.2\mysql-connector-java-5.1.2.jar" />
+<!--<classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.2\mysql-connector-java-5.1.2.jar" />-->
+    <classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
     <context id="mysql" targetRuntime="MyBatis3">
       <commentGenerator>
         <property name="suppressAllComments" value="true"/>
@@ -16,16 +17,16 @@
       <javaTypeResolver>
          <property name="forceBigDecimals" value="false"/>
       </javaTypeResolver>
-      
+
       <javaModelGenerator targetPackage="com.github.api.entity" targetProject="../api/src/main/java">
           <property name="enableSubPackages" value="true"/>
           <property name="trimStrings" value="true"/>
       </javaModelGenerator>
-       
+
       <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
            <property name="enableSubPackages" value="true"/>
       </sqlMapGenerator>
-       
+
       <javaClientGenerator type="XMLMAPPER" targetPackage="com.github.provider.dao" targetProject="src/main/java">
         <property name="enableSubPackages" value="true"/>
       </javaClientGenerator>
@@ -33,8 +34,8 @@
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>
 <!--       <table  tableName="t_bd_score" domainObjectName="Score" enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">      </table>
  --><!--       <table  tableName="t_bd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">      </table>
- -->    
- 
+ -->
+
  	</context>
-      
+
     </generatorConfiguration>

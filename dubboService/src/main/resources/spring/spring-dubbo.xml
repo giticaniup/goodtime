@@ -1,4 +1,4 @@
-<?xml version= "1.0" encoding ="GBK" ?>
+<?xml version= "1.0" encoding ="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -14,9 +14,8 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
     <dubbo:application name="goodtime"/>
-    <!-- 使用multicast广播注册中心暴露发现服务地址 -->
+
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <!-- dubbo provider -->
@@ -24,9 +23,7 @@
 
     <dubbo:protocol name="dubbo" port="10880"/>
 
-    <!--注册dubbo服务
-    1.注册实现类的bean
-    2.注册dubboservice-->
+    <!--DUBBO SERVICE-->
 
 
     <dubbo:service interface="com.kode.api.DemoService" ref="demoService"/>
@@ -34,12 +31,11 @@
 
     <context:annotation-config/>
 
-    <!-- 自动扫描service -->
     <context:component-scan base-package="com.github.provider">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--日志记录配置-->
+    <!--AOP-->
     <bean id="logAspect" class="com.github.common.aspect.LogAspect"/>
 
     <aop:config>
@@ -50,7 +46,7 @@
         </aop:aspect>
     </aop:config>
 
-    <!--使用Gson进行json转换-->
+    <!--CONVERTER-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -60,13 +56,13 @@
         </property>
     </bean>
 
-    <!--引入配置文件-->
+    <!---->
     <bean id="propertyConfigurer"
           class="com.github.common.util.EncryptPropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
-    <!--配置dataSource-->
+    <!--dataSource-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}"/>
         <property name="url" value="${database.url}"/>
@@ -74,25 +70,21 @@
         <property name="password" value="${database.password}"/>
     </bean>
 
-    <!--整合Spring和MyBatis-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:/mapper/UserMapper.xml"/>
     </bean>
-    <!--配置mybatis扫描的包-->
+
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.github.provider.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-    <!-- 对标注@Transactional注解的Bean进行加工处理，以织入事务管理切面 -->
-    <!-- 默认情况下，<tx:annotation-driven的transaction-manager的值为transactionManager，
-    因而此处可直接简化为 <tx:annotation-driven/>-->
+
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!-- 事务增强 -->
+
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <!--事务属性定义  -->
         <tx:attributes>
             <!--            <tx:method name="get*" read-only="false"/>
                        <tx:method name="save*" rollback-for="Exception"/>
@@ -100,10 +92,8 @@
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-    <!-- 对服务层的类提供事务支持 -->
     <aop:config proxy-target-class="true">
         <aop:pointcut id="serviceMethod" expression="execution(* com.github.provider.service.*.*(..))"/>
-        <!-- 引用事务增强 -->
         <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
     </aop:config>
 

@@ -1,8 +1,12 @@
 package com.github.api.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 6035078818409094830L;
+
     private Integer userId;
 
     private String userName;
@@ -71,5 +75,18 @@ public class User {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return com.google.common.base.MoreObjects.toStringHelper(this)
+                .add("userId", userId)
+                .add("userName", userName)
+                .add("name", name)
+                .add("password", password)
+                .add("age", age)
+                .add("birthday", birthday)
+                .add("gender", gender)
+                .toString();
     }
 }

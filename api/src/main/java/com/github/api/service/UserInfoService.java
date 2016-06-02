@@ -11,4 +11,6 @@ public interface UserInfoService {
     int userRegister();
 
     User userTest();
+
+    User selectById(int id);
 }

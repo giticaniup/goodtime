@@ -7,6 +7,7 @@ import com.github.provider.dao.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,25 +17,23 @@ import java.util.Date;
  * Created by zhongcy on 2016/5/12.
  */
 @Service("userInfoService")
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserMapper userMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
+    @Override
+    @Cacheable(value = {"userCache"})
     public User userTest() {
-//        User user = new User();
-//        user.setUserId(2);
-//        user.setAge(22);
-//        user.setBirthday(new Date());
-//        user.setGender(0);
-//        user.setName("lbq");
-//        user.setPassword("11");
-//        user.setUserName("lbq");
-//        userMapper.insert(user);
-        //throw new RuntimeException();
         return userMapper.selectByPrimaryKey(1);
+    }
+
+    @Override
+    @Cacheable(value = {"userCache"},key = "#id")
+    public User selectById(int id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override

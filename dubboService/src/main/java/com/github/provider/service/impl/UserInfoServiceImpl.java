@@ -31,9 +31,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Cacheable(value = {"userCache"},key = "#id")
+    @Cacheable(value = {"userCache"}, key = "#id")
     public User selectById(int id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateUser(User user) {
+        userMapper.updateByPrimaryKey(user);
+        return 0;
     }
 
     @Override

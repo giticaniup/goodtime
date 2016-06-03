@@ -76,7 +76,7 @@
     </build>
 
     <properties>
-        <spring.version>4.1.7.RELEASE</spring.version>
+        <spring.version>4.2.6.RELEASE</spring.version>
         <logback.version>1.1.2</logback.version>
         <slf4j.version>1.7.12</slf4j.version>
         <bonecp.version>0.8.0.RELEASE</bonecp.version>
@@ -334,6 +334,19 @@
                 <groupId>org.mybatis.caches</groupId>
                 <artifactId>mybatis-ehcache</artifactId>
                 <version>1.0.3</version>
+            </dependency>
+
+            <!--mongodb-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>1.9.1.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.2.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

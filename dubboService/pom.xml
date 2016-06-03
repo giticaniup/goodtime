@@ -168,6 +168,15 @@
             <groupId>org.mybatis.caches</groupId>
             <artifactId>mybatis-ehcache</artifactId>
         </dependency>
+        <!--mongodb-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>

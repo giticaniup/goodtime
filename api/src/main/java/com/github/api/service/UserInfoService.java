@@ -13,4 +13,6 @@ public interface UserInfoService {
     User userTest();
 
     User selectById(int id);
+
+    int updateUser(User user);
 }

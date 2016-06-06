@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * mongo测试类
  * Created by zhongcy on 2016/6/3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)

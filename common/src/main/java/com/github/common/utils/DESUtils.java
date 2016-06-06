@@ -1,4 +1,4 @@
-package com.github.common.util;
+package com.github.common.utils;
 
 import org.junit.Test;
 import org.slf4j.Logger;

@@ -2,6 +2,7 @@ package com.kode.test;
 
 import com.github.api.entity.User;
 import com.github.api.service.UserInfoService;
+import com.github.provider.manager.ConfigManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,9 +21,17 @@ public class UserServiceTest {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private ConfigManager configManager;
+
     @Test
     public void testUserTest() throws Exception {
         User user = userInfoService.userTest();
         System.out.println(user);
+    }
+
+    @Test
+    public void testConfigManager(){
+        System.out.println("redisIP"+configManager.getRedisIp());
     }
 }

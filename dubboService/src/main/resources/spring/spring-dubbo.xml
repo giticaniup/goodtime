@@ -14,6 +14,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <import resource="spring-mongo.xml"/>
+    <import resource="spring-jedis.xml"/>
 
     <dubbo:application name="goodtime"/>
 
@@ -57,10 +58,16 @@
         </property>
     </bean>
 
-    <!---->
+    <!--配置文件-->
     <bean id="propertyConfigurer"
-          class="com.github.common.util.EncryptPropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
+          class="com.github.common.utils.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
     </bean>
 
     <!--dataSource-->
@@ -98,14 +105,4 @@
         <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
     </aop:config>
 
-    <!--ehcache-->
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager">
-            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="true">
-                <property name="configLocation" value="classpath:ehcache.xml"></property>
-            </bean>
-        </property>
-    </bean>
-
-    <cache:annotation-driven/>
 </beans>

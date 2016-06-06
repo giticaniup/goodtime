@@ -1,4 +1,4 @@
-package com.github.common.util;
+package com.github.common.utils;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 

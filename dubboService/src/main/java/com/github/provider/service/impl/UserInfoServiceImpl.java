@@ -44,7 +44,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public User selectById(int id) {
         logger.info("sellectById");
         User user = userMapper.selectByPrimaryKey(id);
-        JedisUtils.setObjValue(stringRedisSerializer.serialize(String.valueOf(id)),serializer.serialize(user));
+        JedisUtils.setObjValue(stringRedisSerializer.serialize(String.valueOf(id)), serializer.serialize(user));
         return user;
     }
 

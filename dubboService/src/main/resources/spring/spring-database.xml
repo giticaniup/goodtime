@@ -1,0 +1,62 @@
+<?xml version= "1.0" encoding ="GBK" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+    <!--dataSource-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="${database.url}"/>
+        <property name="driverClassName" value="${database.driver}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+
+        <property name="maxIdle" value="${dbcp2.maxIdle}"/>
+        <property name="minIdle" value="${dbcp2.minIdle}"/>
+        <property name="initialSize" value="${dbcp2.initialSize}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${dbcp2.timeBetweenEvictionRunsMillis}"/>
+
+        <property name="poolPreparedStatements" value="${dbcp2.poolPreparedStatements}"/>
+        <property name="maxOpenPreparedStatements" value="${dbcp2.maxOpenPreparedStatements}"/>
+        <property name="removeAbandonedTimeout" value="${dbcp2.removeAbandonedTimeout}"/>
+
+        <property name="testOnBorrow" value="${dbcp2.testOnBorrow}"/>
+
+        <property name="testOnReturn" value="${dbcp2.testOnReturn}"/>
+
+        <property name="testWhileIdle" value="${dbcp2.testWhileIdle}"/>
+
+        <property name="validationQuery" value="${dbcp2.validationQuery}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.github.provider.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--            <tx:method name="get*" read-only="false"/>
+                       <tx:method name="save*" rollback-for="Exception"/>
+                       <tx:method name="update*"/> -->
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceMethod" expression="execution(* com.github.provider.service.*.*(..))"/>
+        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
+    </aop:config>
+</beans>

@@ -30,12 +30,11 @@
       <javaClientGenerator type="XMLMAPPER" targetPackage="com.github.provider.dao" targetProject="src/main/java">
         <property name="enableSubPackages" value="true"/>
       </javaClientGenerator>
-      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
+<!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
+              enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
+      <table  tableName="user_task" domainObjectName="UserTask" enableCountByExample="false"
+              enableSelectByExample="false"
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>
-<!--       <table  tableName="t_bd_score" domainObjectName="Score" enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">      </table>
- --><!--       <table  tableName="t_bd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">      </table>
- -->
-
  	</context>
 
     </generatorConfiguration>

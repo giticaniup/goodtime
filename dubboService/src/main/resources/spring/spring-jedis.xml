@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="GBK"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:c="http://www.springframework.org/schema/c"
@@ -7,21 +7,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <!-- å¼€å¯ç¼“å­˜æ³¨è§£ -->
+    <!-- ¿ªÆô»º´æ×¢½â -->
     <cache:annotation-driven/>
-    <!-- jediså®¢æˆ·ç«¯è¿žæŽ¥å·¥åŽ‚ -->
+    <!-- jedis¿Í»§¶ËÁ¬½Ó¹¤³§ -->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:hostName="${redis.host}" p:port="${redis.port}" p:database="${redis.database}" p:timeout="3000"/>
 
-    <!-- redisTemplateæ¨¡æ¿ -->
+    <!-- redisTemplateÄ£°å -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
           p:connectionFactory-ref="jedisConnectionFactory"/>
 
-    <!-- redisç¼“å­˜ç®¡ç†å™¨ -->
+    <!-- redis»º´æ¹ÜÀíÆ÷ -->
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
           c:redisOperations-ref="redisTemplate"/>
     
-    <!--jedisæ“ä½œå·¥å…·ç±»-->
+    <!--jedis²Ù×÷¹¤¾ßÀà-->
     <bean class="com.github.common.utils.JedisUtils" init-method="initPool">
         <property name="redisIp" value="${redis.host}"/>
         <property name="redisPort" value="${redis.port}"/>

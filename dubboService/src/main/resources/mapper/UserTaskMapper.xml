@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.provider.dao.UserTaskMapper">
+    <resultMap id="BaseResultMap" type="com.github.api.entity.UserTask">
+        <id column="task_id" property="taskId" jdbcType="INTEGER"/>
+        <result column="task_name" property="taskName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="task_content" property="taskContent" jdbcType="VARCHAR"/>
+        <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="task_score" property="taskScore" jdbcType="INTEGER"/>
+        <result column="task_category" property="taskCategory" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    task_id, task_name, user_id, task_content, begin_time, end_time, task_score, task_category
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from user_task
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.github.api.entity.UserTask">
+    insert into user_task (task_id, task_name, user_id, 
+      task_content, begin_time, end_time, 
+      task_score, task_category)
+    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{taskContent,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{taskScore,jdbcType=INTEGER}, #{taskCategory,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.github.api.entity.UserTask">
+        insert into user_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="taskName != null">
+                task_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="taskContent != null">
+                task_content,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="taskScore != null">
+                task_score,
+            </if>
+            <if test="taskCategory != null">
+                task_category,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                #{taskId,jdbcType=INTEGER},
+            </if>
+            <if test="taskName != null">
+                #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="taskContent != null">
+                #{taskContent,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="taskScore != null">
+                #{taskScore,jdbcType=INTEGER},
+            </if>
+            <if test="taskCategory != null">
+                #{taskCategory,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.github.api.entity.UserTask">
+        update user_task
+        <set>
+            <if test="taskName != null">
+                task_name = #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="taskContent != null">
+                task_content = #{taskContent,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="taskScore != null">
+                task_score = #{taskScore,jdbcType=INTEGER},
+            </if>
+            <if test="taskCategory != null">
+                task_category = #{taskCategory,jdbcType=INTEGER},
+            </if>
+        </set>
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.github.api.entity.UserTask">
+    update user_task
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      task_content = #{taskContent,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      task_score = #{taskScore,jdbcType=INTEGER},
+      task_category = #{taskCategory,jdbcType=INTEGER}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+
+    <!--根据用户Id查询用户任务-->
+    <select id="getUserTaskListByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_task
+        <where>
+            <if test="userId != null">
+                    user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="beginTime != null">
+                AND begin_time <![CDATA[  >=  ]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                AND begin_time <![CDATA[  <=  ]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <!--判断任务是否开始-->
+    <select id="taskHasBegin" resultType="java.lang.Integer">
+        select COUNT(1)
+        from user_task
+        <where>
+            <if test="taskId != null">
+                    task_id = #{taskId,jdbcType=INTEGER}
+            </if>
+            <if test="time != null">
+                AND end_time <![CDATA[  >=  ]]> #{time,jdbcType=TIMESTAMP}
+                AND begin_time <![CDATA[  <=  ]]> #{time,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+</mapper>

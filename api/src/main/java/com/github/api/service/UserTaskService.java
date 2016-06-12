@@ -26,4 +26,9 @@ public interface UserTaskService {
      * 判断任务是否已经开始
      */
     boolean hasBegin(Integer taskId,long time);
+
+    /**
+     * 增加用户任务记录
+     */
+    int insertUserTask(UserTask userTask);
 }

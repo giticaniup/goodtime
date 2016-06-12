@@ -32,4 +32,9 @@ public class UserTaskServiceImpl implements UserTaskService {
     public boolean hasBegin(Integer taskId, long time) {
         return userTaskMapper.taskHasBegin(taskId, time) > 0;
     }
+
+    @Override
+    public int insertUserTask(UserTask userTask) {
+        return userTaskMapper.insert(userTask);
+    }
 }

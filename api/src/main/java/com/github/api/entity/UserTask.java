@@ -1,6 +1,8 @@
 package com.github.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,8 +19,12 @@ public class UserTask implements Serializable{
 
     private String taskContent;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")  //取日期时使用
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
     private Date beginTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")  //取日期时使用
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
     private Date endTime;
 
     private Integer taskScore;

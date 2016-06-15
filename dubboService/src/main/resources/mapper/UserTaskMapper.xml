@@ -135,11 +135,11 @@
             <if test="userId != null">
                     user_id = #{userId,jdbcType=INTEGER}
             </if>
-            <if test="beginTime != null">
+            <if test="beginTime != null and beginTime != ''">
                 AND begin_time <![CDATA[  >=  ]]> #{beginTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="endTime != null">
-                AND begin_time <![CDATA[  <=  ]]> #{endTime,jdbcType=TIMESTAMP}
+            <if test="endTime != null and endTime!= ''">
+                AND end_time <![CDATA[  <=  ]]> #{endTime,jdbcType=TIMESTAMP}
             </if>
         </where>
     </select>

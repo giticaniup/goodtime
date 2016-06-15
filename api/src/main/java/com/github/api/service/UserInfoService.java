@@ -15,4 +15,6 @@ public interface UserInfoService {
     User selectById(int id);
 
     int updateUser(User user);
+
+    User loginIn(Integer userId, String password);
 }

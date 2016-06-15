@@ -1,14 +1,14 @@
 package com.github.api.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserTask implements Serializable{
+public class UserTask implements Serializable {
 
     private static final long serialVersionUID = 2190855450436823688L;
 
@@ -20,10 +20,10 @@ public class UserTask implements Serializable{
 
     private String taskContent;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date beginTime;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date endTime;
 
     private Integer taskScore;
@@ -62,7 +62,7 @@ public class UserTask implements Serializable{
         this.taskContent = taskContent == null ? null : taskContent.trim();
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     public Date getBeginTime() {
         return beginTime;
     }
@@ -71,7 +71,7 @@ public class UserTask implements Serializable{
         this.beginTime = beginTime;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     public Date getEndTime() {
         return endTime;
     }
@@ -108,5 +108,10 @@ public class UserTask implements Serializable{
                 .add("taskScore", taskScore)
                 .add("taskCategory", taskCategory)
                 .toString();
+    }
+
+    public void checkParams(){
+        Preconditions.checkArgument(userId!=null,"userId is null");
+        Preconditions.checkArgument(taskScore!=null,"taskScore is illegal");
     }
 }

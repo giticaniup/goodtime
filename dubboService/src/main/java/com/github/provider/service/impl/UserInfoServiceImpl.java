@@ -14,6 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户Service类
@@ -53,6 +54,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         userMapper.updateByPrimaryKey(user);
         return 0;
     }
+
+    @Override
+    public User loginIn(Integer userId, String password) {
+        List<User> userList = userMapper.selectForLogin(userId, password);
+        if (userList != null && userList.size() == 1) {
+            return userList.get(0);
+        }
+        return null;
+    }
+
 
     @Override
     public int userRegister() {

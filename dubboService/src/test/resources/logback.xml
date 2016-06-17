@@ -13,7 +13,7 @@
         <appender-ref ref="MONGO" />
     </logger> -->
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 

@@ -20,7 +20,7 @@
     <!-- redis缓存管理器 -->
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
           c:redisOperations-ref="redisTemplate"/>
-    
+
     <!--jedis操作工具类-->
     <bean class="com.github.common.utils.JedisUtils" init-method="initPool">
         <property name="redisIp" value="${redis.host}"/>

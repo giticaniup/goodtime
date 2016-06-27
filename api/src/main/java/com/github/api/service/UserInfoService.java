@@ -17,4 +17,6 @@ public interface UserInfoService {
     int updateUser(User user);
 
     User loginIn(Integer userId, String password);
+
+    int delete();
 }

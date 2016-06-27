@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/spring-dubbo.xml")
@@ -34,4 +36,22 @@ public class UserServiceTest {
     public void testConfigManager(){
         System.out.println("redisIP"+configManager.getRedisIp());
     }
+
+    @Test
+    public void testRegister(){
+        int result = -111;
+        try {
+            result = userInfoService.userRegister();
+            System.out.println(result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            System.out.println("result:"+result);
+        }
+    }
+    @Test
+    public void testDelete(){
+        System.out.println(userInfoService.delete());
+    }
+
 }

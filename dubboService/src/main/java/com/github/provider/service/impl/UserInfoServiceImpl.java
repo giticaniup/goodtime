@@ -41,7 +41,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    //@Cacheable(value = {"userCache"}, key = "#id")
+    @Cacheable(value = {"userCache"}, key = "#id")
     public User selectById(int id) {
         logger.info("sellectById");
         User user = userMapper.selectByPrimaryKey(id);
@@ -79,4 +79,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         //throw new RuntimeException();
         return userMapper.insert(user);
     }
+    @Override
+    public int delete(){
+        return userMapper.deleteByPrimaryKey(4);
+    }
+
 }

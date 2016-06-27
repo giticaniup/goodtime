@@ -32,7 +32,7 @@
       </javaClientGenerator>
 <!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
-      <table  tableName="user_task" domainObjectName="UserTask" enableCountByExample="false"
+      <table  tableName="user_diary" domainObjectName="UserDiary" enableCountByExample="false"
               enableSelectByExample="false"
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>
  	</context>

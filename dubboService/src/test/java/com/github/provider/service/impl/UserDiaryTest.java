@@ -22,7 +22,7 @@ public class UserDiaryTest {
 
     @Test
     public void testGet(){
-        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1);
+        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1,10,1);
         System.out.println(userDiaryList);
     }
 }

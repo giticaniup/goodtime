@@ -64,4 +64,15 @@ public class UserTaskServiceImplTest {
         logger.info("-----------------");
         userTaskService.hasBegin(1,date.getTime());
     }
+
+    @Test
+    public void testInsert(){
+        UserTask userTask = new UserTask();
+        userTask.setUserId(1);
+        userTask.setBeginTime(new Date());
+        userTask.setEndTime(new Date());
+        userTask.setTaskName("测试");
+        userTask.setTaskContent("测试内容");
+        userTaskService.insertUserTask(userTask);
+    }
 }

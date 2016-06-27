@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 /**
  * unit test
  * Created by zhongcy on 2016/6/27.
@@ -20,7 +22,7 @@ public class UserDiaryTest {
 
     @Test
     public void testGet(){
-        UserDiary userDiary = userDiaryService.findDiaryByUserId(1);
-        System.out.println(userDiary);
+        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1);
+        System.out.println(userDiaryList);
     }
 }

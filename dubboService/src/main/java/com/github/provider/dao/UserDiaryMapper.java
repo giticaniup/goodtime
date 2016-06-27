@@ -3,6 +3,8 @@ package com.github.provider.dao;
 import com.github.api.entity.UserDiary;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserDiaryMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -18,5 +20,6 @@ public interface UserDiaryMapper {
 
     int updateByPrimaryKey(UserDiary record);
 
-    UserDiary selectByUserId(@Param("userId") Integer userId);
+    List<UserDiary> selectByUserId(@Param("userId") int userId,@Param("fromRow") int fromRow,@Param("pageSize") int
+            pageSize);
 }

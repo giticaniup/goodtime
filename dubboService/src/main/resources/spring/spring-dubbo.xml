@@ -29,6 +29,7 @@
     <dubbo:service interface="com.kode.api.DemoService" ref="demoService"/>
     <dubbo:service interface="com.github.api.service.UserInfoService" ref="userInfoService"/>
     <dubbo:service interface="com.github.api.service.UserTaskService" ref="userTaskService"/>
+    <dubbo:service interface="com.github.api.service.UserDiaryService" ref="userDiaryService"/>
 
     <context:annotation-config/>
 

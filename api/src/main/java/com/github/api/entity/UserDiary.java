@@ -1,6 +1,8 @@
 package com.github.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,13 +34,16 @@ public class UserDiary implements Serializable{
     /**
      * 创建时间
      */
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date createTime;
 
     /**
      * 最后修改时间
      */
-    private Date modifyTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Date modifyTime;
     /**
      * 内容
      */
@@ -76,6 +81,7 @@ public class UserDiary implements Serializable{
         this.title = title == null ? null : title.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -84,6 +90,7 @@ public class UserDiary implements Serializable{
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     public Date getModifyTime() {
         return modifyTime;
     }

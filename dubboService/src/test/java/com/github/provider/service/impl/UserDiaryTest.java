@@ -1,6 +1,7 @@
 package com.github.provider.service.impl;
 
 import com.github.api.entity.UserDiary;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,13 @@ public class UserDiaryTest {
 
     @Test
     public void testGet(){
-        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1,10,1);
-        System.out.println(userDiaryList);
+        List<UserDiary> userDiaryList = userDiaryService.findDiaryById(1,2,1);
+        Assert.assertEquals(userDiaryList.size(),2);
+    }
+
+    @Test
+    public void testGetByDate(){
+        List<UserDiary> userDiaryList = userDiaryService.findDiaryByDate(1,2,1,2016,6);
+        Assert.assertEquals(2,userDiaryList.size());
     }
 }

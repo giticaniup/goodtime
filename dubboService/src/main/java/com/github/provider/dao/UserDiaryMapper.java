@@ -22,4 +22,6 @@ public interface UserDiaryMapper {
 
     List<UserDiary> selectByUserId(@Param("userId") int userId,@Param("fromRow") int fromRow,@Param("pageSize") int
             pageSize);
+    List<UserDiary> selectByDate(@Param("userId") int userId,@Param("fromRow") int fromRow,@Param("pageSize") int
+            pageSize,@Param("beginTime") String beginTime,@Param("endTime") String endTime);
 }

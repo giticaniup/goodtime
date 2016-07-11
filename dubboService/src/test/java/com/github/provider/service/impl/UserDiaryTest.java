@@ -23,7 +23,7 @@ public class UserDiaryTest {
 
     @Test
     public void testGet(){
-        List<UserDiary> userDiaryList = userDiaryService.findDiaryById(1,2,1);
+        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1,2,1);
         Assert.assertEquals(userDiaryList.size(),2);
     }
 

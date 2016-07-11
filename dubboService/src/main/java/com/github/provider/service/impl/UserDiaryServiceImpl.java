@@ -25,7 +25,7 @@ public class UserDiaryServiceImpl implements UserDiaryService {
     private UserDiaryMapper userDiaryMapper;
 
     @Override
-    public List<UserDiary> findDiaryById(int userId, int pageSize, int pageNum) {
+    public List<UserDiary> findDiaryByUserId(int userId, int pageSize, int pageNum) {
         int fromRow = (pageNum - 1) * pageSize;
         return userDiaryMapper.selectByUserId(userId, fromRow, pageSize);
     }

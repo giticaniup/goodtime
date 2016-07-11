@@ -18,7 +18,7 @@ public interface UserDiaryService {
      * @param pageNum
      * @return
      */
-    List<UserDiary> findDiaryById(int userId, int pageSize, int pageNum);
+    List<UserDiary> findDiaryByUserId(int userId, int pageSize, int pageNum);
 
     /**
      * 根据日期查询人员日志

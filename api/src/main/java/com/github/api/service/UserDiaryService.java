@@ -1,6 +1,7 @@
 package com.github.api.service;
 
 import com.github.api.entity.UserDiary;
+import com.github.api.result.FindDiaryResult;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface UserDiaryService {
      * @param pageNum
      * @return
      */
-    List<UserDiary> findDiaryByUserId(int userId, int pageSize, int pageNum);
+    FindDiaryResult findDiaryByUserId(int userId, int pageSize, int pageNum);
 
     /**
      * 根据日期查询人员日志
@@ -28,7 +29,7 @@ public interface UserDiaryService {
      * @param pageNum
      * @return
      */
-    List<UserDiary> findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month);
+    FindDiaryResult findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month);
 
     /**
      * 日志保存

@@ -1,14 +1,14 @@
 package com.github.provider.service.impl;
 
-import com.github.api.entity.UserDiary;
+import com.github.api.result.FindDiaryResult;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 /**
  * unit test
@@ -18,18 +18,24 @@ import java.util.List;
 @ContextConfiguration(locations = "classpath:spring/spring-dubbo.xml")
 public class UserDiaryTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserDiaryTest.class);
+
     @Autowired
     private UserDiaryServiceImpl userDiaryService;
 
     @Test
-    public void testGet(){
-        List<UserDiary> userDiaryList = userDiaryService.findDiaryByUserId(1,2,1);
-        Assert.assertEquals(userDiaryList.size(),2);
+    public void testGet() {
+        FindDiaryResult findDiaryResult = userDiaryService.findDiaryByUserId(1, 2, 1);
+        Assert.assertEquals(2, findDiaryResult.getUserDiaries().size());
+        logger.info(String.valueOf(findDiaryResult.getTotalCount()));
+        logger.info(String.valueOf(findDiaryResult.getPageCount()));
     }
 
     @Test
-    public void testGetByDate(){
-        List<UserDiary> userDiaryList = userDiaryService.findDiaryByDate(1,2,1,2016,6);
-        Assert.assertEquals(2,userDiaryList.size());
+    public void testGetByDate() {
+        FindDiaryResult findDiaryResult = userDiaryService.findDiaryByDate(1, 2, 1, 2016, 6);
+        Assert.assertEquals(2, findDiaryResult.getUserDiaries().size());
+        logger.info(String.valueOf(findDiaryResult.getTotalCount()));
+        logger.info(String.valueOf(findDiaryResult.getPageCount()));
     }
 }

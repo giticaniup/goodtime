@@ -148,4 +148,18 @@
     where user_id = #{userId,jdbcType=INTEGER} and create_time &gt; #{beginTime} and create_time &lt; #{endTime}
     ORDER BY create_time desc limit #{fromRow},#{pageSize}
   </select>
+  <select id="selectCount" resultType="int">
+    select COUNT(1) FROM user_diary
+    <where>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="beginTime != null">
+        AND create_time &gt; #{beginTime}
+      </if>
+      <if test="endTime != null">
+        AND create_time &lt; #{endTime}
+      </if>
+    </where>
+  </select>
 </mapper>

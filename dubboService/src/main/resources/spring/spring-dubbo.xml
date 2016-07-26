@@ -2,13 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
          http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd" default-lazy-init ="true">
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
+       default-lazy-init="true">
 
     <import resource="spring-database.xml"/>
     <import resource="spring-mongo.xml"/>
@@ -66,8 +67,11 @@
                 <!-- 这里支持多种寻址方式：classpath和file -->
                 <value>classpath:jdbc.properties</value>
                 <value>classpath:redis.properties</value>
+                <value>classpath:solr.properties</value>
             </list>
         </property>
     </bean>
 
+    <!--事务配置-->
+    <task:annotation-driven/>
 </beans>

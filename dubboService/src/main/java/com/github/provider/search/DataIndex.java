@@ -18,9 +18,9 @@ public class DataIndex {
     @Autowired
     private Configuration configuration;
 
-    @Scheduled(cron="0 0/1 * * * ?")
+    @Scheduled(cron="0 0/1 21 * * ?")
     public void indexData(){
-        System.out.println("test");
+        logger.error("test");
     }
 
 }

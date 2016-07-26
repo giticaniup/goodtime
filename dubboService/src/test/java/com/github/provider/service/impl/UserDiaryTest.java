@@ -1,6 +1,7 @@
 package com.github.provider.service.impl;
 
 import com.github.api.result.FindDiaryResult;
+import com.github.provider.search.DataIndex;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class UserDiaryTest {
     @Autowired
     private UserDiaryServiceImpl userDiaryService;
 
+    @Autowired
+    private DataIndex dataIndex;
+
     @Test
     public void testGet() {
         FindDiaryResult findDiaryResult = userDiaryService.findDiaryByUserId(1, 2, 1);
@@ -38,4 +42,10 @@ public class UserDiaryTest {
         logger.info(String.valueOf(findDiaryResult.getTotalCount()));
         logger.info(String.valueOf(findDiaryResult.getPageCount()));
     }
+
+    @Test
+    public void testSolr(){
+        dataIndex.indexData();
+    }
+
 }

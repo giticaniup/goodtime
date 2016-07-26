@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class Configuration {
-    @Value("solr.url")
+
+    @Value("${solr.url}")
     private String solrUrl;
 
-    @Value("solr.table")
+    @Value("${solr.table}")
     private String solrTables;
 
     public String getSolrTables() {

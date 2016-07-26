@@ -11,15 +11,16 @@ import org.springframework.stereotype.Component;
  * Created by zhongcy on 2016/7/26.
  */
 
-@Component("dataIndex")
+@Component
 public class DataIndex {
     private static final Logger logger = LoggerFactory.getLogger(DataIndex.class);
 
     @Autowired
     private Configuration configuration;
 
-    @Scheduled(cron="0 0/1 21 * * ?")
+    @Scheduled(cron="0/5 * * * * ?")
     public void indexData(){
+        logger.error(configuration.getSolrUrl());
         logger.error("test");
     }
 

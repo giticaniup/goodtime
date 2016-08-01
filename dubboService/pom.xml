@@ -219,7 +219,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>*.xml</include>
-                    <include>*.properties</include>
+                    <include>properties/*.properties</include>
                     <include>spring/*.xml</include>
                     <include>mapper/*.xml</include>
                 </includes>

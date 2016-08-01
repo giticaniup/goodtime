@@ -7,6 +7,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 注意：@DateTimeFormat注解用于入参，@JsonFormat用于出参
+ *
+ */
 public class UserDiary implements Serializable{
 
     private static final long serialVersionUID = -133117827074266211L;

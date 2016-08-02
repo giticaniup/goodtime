@@ -126,7 +126,6 @@
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
 
-    <!--根据用户Id查询用户任务-->
     <select id="getUserTaskListByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -143,7 +142,7 @@
             </if>
         </where>
     </select>
-    <!--判断任务是否开始-->
+
     <select id="taskHasBegin" resultType="java.lang.Integer">
         select COUNT(1)
         from user_task

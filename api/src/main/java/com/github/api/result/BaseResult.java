@@ -1,50 +1,32 @@
 package com.github.api.result;
 
-import com.github.api.enums.UserCodeEnums;
 import com.google.common.base.MoreObjects;
-
-import java.io.Serializable;
 
 /**
  * 返回结果定义
  * Created by zhongcy on 2016/7/13.
  */
-public class BaseResult implements Serializable {
+public class BaseResult<T> extends Result {
     private static final long serialVersionUID = -7083472192798914723L;
 
-    protected Integer errorCode;
+    /**
+     * 结果信息
+     */
+    protected T data;
 
-    protected String errorMsg;
-
-    public Integer getErrorCode() {
-        return errorCode;
+    public T getData() {
+        return data;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
-    public BaseResult() {
-    }
-
-    public BaseResult(UserCodeEnums userCodeEnums) {
-        this.errorCode = userCodeEnums.getErrorCode();
-        this.errorMsg = userCodeEnums.getErrorMsg();
+    public void setData(T data) {
+        this.data = data;
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("errorCode", errorCode)
-                .add("errorMsg", errorMsg)
+                .add("super", super.toString())
+                .add("data", data)
                 .toString();
     }
 }

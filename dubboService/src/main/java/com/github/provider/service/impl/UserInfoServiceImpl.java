@@ -13,6 +13,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public User selectById(int id) {
         logger.info("sellectById");
         User user = userMapper.selectByPrimaryKey(id);
+        List<String> list = new ArrayList<>();
+        list.stream().filter(s -> s.equals("1"));
         JedisUtils.setObjValue(stringRedisSerializer.serialize(String.valueOf(id)), serializer.serialize(user));
         return user;
     }

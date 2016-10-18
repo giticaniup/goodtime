@@ -5,7 +5,7 @@
          http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
        default-lazy-init="true">
 
-    <!--ehcache-->
+    <!--ehcache,use redis to cache data now-->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager">
             <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">

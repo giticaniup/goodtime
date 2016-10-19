@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**定时任务做数据索引
+ * 功能暂缺
  * Created by zhongcy on 2016/7/26.
  */
 

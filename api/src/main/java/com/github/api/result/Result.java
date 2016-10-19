@@ -23,6 +23,14 @@ public class Result implements Serializable {
      */
     protected String errorMsg = "success";
 
+    public Result() {
+    }
+
+    public Result(int errorCode, String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
     public int getErrorCode() {
         return errorCode;
     }

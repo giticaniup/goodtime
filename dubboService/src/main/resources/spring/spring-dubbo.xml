@@ -52,7 +52,7 @@
         </aop:aspect>
     </aop:config>
 
-    <!--CONVERTER-->
+    <!--CONVERTER //todo make sure if it is useful-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>

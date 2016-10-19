@@ -9,28 +9,28 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-4.1.xsd" default-lazy-init="true">
     <!--dataSource-->
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="url" value="${database.url}"/>
         <property name="driverClassName" value="${database.driver}"/>
         <property name="username" value="${database.username}"/>
         <property name="password" value="${database.password}"/>
 
-        <property name="maxIdle" value="${dbcp2.maxIdle}"/>
-        <property name="minIdle" value="${dbcp2.minIdle}"/>
-        <property name="initialSize" value="${dbcp2.initialSize}"/>
-        <property name="timeBetweenEvictionRunsMillis" value="${dbcp2.timeBetweenEvictionRunsMillis}"/>
+        <property name="minIdle" value="${druid.minIdle}"/>
+        <property name="initialSize" value="${druid.initialSize}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}"/>
 
-        <property name="poolPreparedStatements" value="${dbcp2.poolPreparedStatements}"/>
-        <property name="maxOpenPreparedStatements" value="${dbcp2.maxOpenPreparedStatements}"/>
-        <property name="removeAbandonedTimeout" value="${dbcp2.removeAbandonedTimeout}"/>
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}"/>
+        <property name="maxOpenPreparedStatements" value="${druid.maxOpenPreparedStatements}"/>
+        <property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}"/>
 
-        <property name="testOnBorrow" value="${dbcp2.testOnBorrow}"/>
+        <property name="testOnBorrow" value="${druid.testOnBorrow}"/>
 
-        <property name="testOnReturn" value="${dbcp2.testOnReturn}"/>
+        <property name="testOnReturn" value="${druid.testOnReturn}"/>
 
-        <property name="testWhileIdle" value="${dbcp2.testWhileIdle}"/>
+        <property name="testWhileIdle" value="${druid.testWhileIdle}"/>
 
-        <property name="validationQuery" value="${dbcp2.validationQuery}"/>
+        <property name="validationQuery" value="${druid.validationQuery}"/>
+        <property name="filters" value="stat" />
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

@@ -44,7 +44,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Cacheable(value = {"userCache"}, key = "#id")
     public User selectById(int id) {
-        logger.info("sellectById");
+        logger.info("selectById");
         User user = userMapper.selectByPrimaryKey(id);
         List<String> list = new ArrayList<>();
         list.stream().filter(s -> s.equals("1"));

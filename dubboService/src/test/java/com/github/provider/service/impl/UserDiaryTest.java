@@ -1,7 +1,7 @@
 package com.github.provider.service.impl;
 
 import com.github.api.entity.UserDiary;
-import com.github.api.result.FindResult;
+import com.github.api.result.PagerResult;
 import com.github.provider.search.DataIndex;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public class UserDiaryTest {
 
     @Test
     public void testGet() {
-        FindResult<List<UserDiary>> result = userDiaryService.findDiaryByUserId(1, 2, 1);
+        PagerResult<List<UserDiary>> result = userDiaryService.findDiaryByUserId(1, 2, 1);
         logger.info(String.valueOf(result.getTotalCount()));
         logger.info(String.valueOf(result.getPageCount()));
         logger.info(String.valueOf(result.getData()));
@@ -39,7 +39,7 @@ public class UserDiaryTest {
 
     @Test
     public void testGetByDate() {
-        FindResult<List<UserDiary>> findDiaryResult = userDiaryService.findDiaryByDate(1, 2, 1, 2016, 6);
+        PagerResult<List<UserDiary>> findDiaryResult = userDiaryService.findDiaryByDate(1, 2, 1, 2016, 6);
         logger.info(String.valueOf(findDiaryResult.getTotalCount()));
         logger.info(String.valueOf(findDiaryResult.getPageCount()));
     }

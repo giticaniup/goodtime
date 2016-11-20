@@ -1,7 +1,7 @@
 package com.github.provider.utils;
 
 
-import com.github.api.result.FindResult;
+import com.github.api.result.PagerResult;
 
 /**
  * 查询结果分页工具类
@@ -12,8 +12,8 @@ public class PagingUtil {
     /**
      * 返回查询结果中的当前页、总页数、总记录数
      */
-    public static <T extends FindResult> void pagingData(T result, Integer count,
-                                                         Integer pageSize, Integer pageNumber) {
+    public static <T extends PagerResult> void pagingData(T result, Integer count,
+                                                          Integer pageSize, Integer pageNumber) {
         result.setTotalCount(count);
         result.setCurrentPage(pageNumber);
         result.setPageCount((int) Math.ceil((double) count / pageSize));

@@ -1,8 +1,7 @@
 package com.github.provider.service.impl;
 
 import com.github.api.entity.UserDiary;
-import com.github.api.result.FindResult;
-import com.github.api.result.Result;
+import com.github.api.result.PagerResult;
 import com.github.api.service.UserDiaryService;
 import com.github.provider.dao.UserDiaryMapper;
 import com.github.provider.utils.PagingUtil;
@@ -24,18 +23,18 @@ public class UserDiaryServiceImpl implements UserDiaryService {
     private UserDiaryMapper userDiaryMapper;
 
     @Override
-    public FindResult<List<UserDiary>> findDiaryByUserId(int userId, int pageSize, int pageNum) {
+    public PagerResult<List<UserDiary>> findDiaryByUserId(int userId, int pageSize, int pageNum) {
         int fromRow = (pageNum - 1) * pageSize;
         List<UserDiary> userDiaries = userDiaryMapper.selectByUserId(userId, fromRow, pageSize);
         int totalCount = userDiaryMapper.selectCount(userId, null, null);
-        FindResult<List<UserDiary>> result = new FindResult<>();
+        PagerResult<List<UserDiary>> result = new PagerResult<>();
         result.setData(userDiaries);
         PagingUtil.pagingData(result, totalCount, pageSize, pageNum);
         return result;
     }
 
     @Override
-    public FindResult<List<UserDiary>> findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month) {
+    public PagerResult<List<UserDiary>> findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month) {
         int fromRow = (pageNum - 1) * pageSize;
         String beginTime = Joiner.on("-").join(year, "0" + month);
         String endTime = Joiner.on("-").join(year, "0" + (month + 1));
@@ -43,17 +42,16 @@ public class UserDiaryServiceImpl implements UserDiaryService {
         List<UserDiary> userDiaries = userDiaryMapper.selectByDate(userId, fromRow, pageSize, beginTime, endTime);
         int totalCount = userDiaryMapper.selectCount(userId, beginTime, endTime);
 
-        FindResult<List<UserDiary>> result = new FindResult<>();
+        PagerResult<List<UserDiary>> result = new PagerResult<>();
         result.setData(userDiaries);
         PagingUtil.pagingData(result, totalCount, pageSize, pageNum);
         return result;
     }
 
     @Override
-    public Result saveUserDiary(UserDiary userDiary) {
+    public void saveUserDiary(UserDiary userDiary) {
         userDiary.setCreateTime(new Date());
         userDiary.setModifyTime(new Date());
         userDiaryMapper.insert(userDiary);
-        return new Result();
     }
 }

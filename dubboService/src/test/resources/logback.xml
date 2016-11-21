@@ -1,20 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-   
-
-
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{12} %X{traceId} %X{userId} %msg%n</pattern>
         </encoder>
     </appender>
 
-   <!--  <logger name="com.facishare" level="DEBUG" additivity="false">
-        <appender-ref ref="MONGO" />
-    </logger> -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
-
 </configuration>

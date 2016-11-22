@@ -6,7 +6,7 @@
        default-lazy-init="true">
 
     <!--ehcache,use redis to cache data now-->
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+<!--    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager">
             <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
                 <property name="shared" value="true"/>
@@ -15,5 +15,5 @@
         </property>
     </bean>
 
-    <cache:annotation-driven/>
+    <cache:annotation-driven/>-->
 </beans>

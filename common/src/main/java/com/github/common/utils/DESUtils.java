@@ -77,9 +77,9 @@ public class DESUtils {
 
     @Test
     public void test() {
-        System.out.println(getEncryptString("root"));
+        System.out.println(getEncryptString("kode"));
         System.out.println(getEncryptString(""));
-        System.out.println(getDecryptString("8sHA1tBPVbA="));
+        System.out.println(getDecryptString("W61oVuV0H/w="));
         System.out.println(getDecryptString("9mlenn6m+7g="));
     }
 }

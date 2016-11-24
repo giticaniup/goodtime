@@ -141,6 +141,7 @@
                 AND end_time <![CDATA[  <=  ]]> #{endTime,jdbcType=TIMESTAMP}
             </if>
         </where>
+        ORDER BY task_id DESC
     </select>
 
     <select id="taskHasBegin" resultType="java.lang.Integer">

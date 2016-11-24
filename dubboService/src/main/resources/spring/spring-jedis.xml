@@ -20,8 +20,8 @@
     <!-- redisTemplateÄ£°å -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
           p:connectionFactory-ref="jedisConnectionFactory">
-<!--        <property name="keySerializer" ref="stringRedisSerializer"/>
-        <property name="valueSerializer" ref="serializer"/>-->
+        <property name="keySerializer" ref="stringRedisSerializer"/>
+        <property name="valueSerializer" ref="serializer"/>
     </bean>
 
     <!-- redis»º´æ¹ÜÀíÆ÷ -->

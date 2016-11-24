@@ -4,6 +4,7 @@ package com.github.provider.service.impl;
 import com.github.api.entity.User;
 import com.github.api.service.UserInfoService;
 import com.github.common.utils.JedisUtils;
+import com.github.provider.constants.Constant;
 import com.github.provider.dao.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,14 +37,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     @Override
-//    @Cacheable(value = {"userCache"})
+    @Cacheable(value = {Constant.USER_CACHE}, key = "#root.methodName")
     public User userTest() {
         logger.info("into method");
         return userMapper.selectByPrimaryKey(1);
     }
 
     @Override
-    @Cacheable(value = {"userCache"}, key = "#id")
+    @Cacheable(value = {Constant.USER_CACHE}, key = "#root.methodName+#id")
     public User selectById(int id) {
         logger.info("selectById");
         User user = userMapper.selectByPrimaryKey(id);

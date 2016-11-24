@@ -32,6 +32,7 @@ public class UserTaskServiceImplTest {
     private final static Logger logger = LoggerFactory.getLogger(UserTaskServiceImplTest.class);
 
     @Autowired
+
     private UserTaskServiceImpl userTaskService;
 
     @Test

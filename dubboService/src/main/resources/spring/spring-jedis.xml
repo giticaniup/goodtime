@@ -14,9 +14,15 @@
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:hostName="${redis.host}" p:port="${redis.port}" p:database="${redis.database}" p:timeout="3000"/>
 
+    <bean id = "serializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+    <bean id = "stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
     <!-- redisTemplateÄ£°å -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-          p:connectionFactory-ref="jedisConnectionFactory"/>
+          p:connectionFactory-ref="jedisConnectionFactory">
+<!--        <property name="keySerializer" ref="stringRedisSerializer"/>
+        <property name="valueSerializer" ref="serializer"/>-->
+    </bean>
 
     <!-- redis»º´æ¹ÜÀíÆ÷ -->
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
@@ -30,6 +36,5 @@
         <property name="timeout" value="${redis.maxWait}"/>
     </bean>
 
-    <bean id = "serializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
-    <bean id = "stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
 </beans>

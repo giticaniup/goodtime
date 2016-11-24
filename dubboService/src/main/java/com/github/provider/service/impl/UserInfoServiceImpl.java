@@ -36,8 +36,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     @Override
-    @Cacheable(value = {"userCache"})
+//    @Cacheable(value = {"userCache"})
     public User userTest() {
+        logger.info("into method");
         return userMapper.selectByPrimaryKey(1);
     }
 

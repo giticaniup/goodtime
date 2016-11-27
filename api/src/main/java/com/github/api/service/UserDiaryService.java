@@ -19,7 +19,7 @@ public interface UserDiaryService {
      * @param pageNum
      * @return
      */
-    PagerResult<List<UserDiary>> findDiaryByUserId(int userId, int pageSize, int pageNum);
+    PagerResult<List<UserDiary>> findDiaryByUserId(Integer userId, int pageSize, int pageNum);
 
     /**
      * 根据日期查询人员日志
@@ -29,7 +29,7 @@ public interface UserDiaryService {
      * @param pageNum
      * @return
      */
-    PagerResult<List<UserDiary>> findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month);
+    PagerResult<List<UserDiary>> findDiaryByDate(Integer userId, int pageSize, int pageNum, int year, int month);
 
     /**
      * 日志保存
@@ -38,4 +38,6 @@ public interface UserDiaryService {
      * @return
      */
     void saveUserDiary(UserDiary userDiary);
+
+    UserDiary findDiaryById(Integer id);
 }

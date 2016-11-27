@@ -34,7 +34,7 @@ public class UserDiaryTest {
         PagerResult<List<UserDiary>> result = userDiaryService.findDiaryByUserId(1, 2, 1);
         logger.info(String.valueOf(result.getTotalCount()));
         logger.info(String.valueOf(result.getPageCount()));
-        logger.info(String.valueOf(result.getData()));
+        logger.info(String.valueOf(result.getItems()));
     }
 
     @Test

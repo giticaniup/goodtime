@@ -12,7 +12,7 @@ public class PagerResult<T> implements Serializable {
 
     private static final long serialVersionUID = 4886820386765508911L;
 
-    private T data;
+    private T items;
 
     private Integer pageCount;
 
@@ -20,12 +20,12 @@ public class PagerResult<T> implements Serializable {
 
     private Integer currentPage;
 
-    public T getData() {
-        return data;
+    public T getItems() {
+        return items;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setItems(T items) {
+        this.items = items;
     }
 
     public Integer getPageCount() {
@@ -55,7 +55,7 @@ public class PagerResult<T> implements Serializable {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("data", data)
+                .add("items", items)
                 .add("pageCount", pageCount)
                 .add("totalCount", totalCount)
                 .add("currentPage", currentPage)

@@ -23,18 +23,18 @@ public class UserDiaryServiceImpl implements UserDiaryService {
     private UserDiaryMapper userDiaryMapper;
 
     @Override
-    public PagerResult<List<UserDiary>> findDiaryByUserId(int userId, int pageSize, int pageNum) {
+    public PagerResult<List<UserDiary>> findDiaryByUserId(Integer userId, int pageSize, int pageNum) {
         int fromRow = (pageNum - 1) * pageSize;
         List<UserDiary> userDiaries = userDiaryMapper.selectByUserId(userId, fromRow, pageSize);
         int totalCount = userDiaryMapper.selectCount(userId, null, null);
         PagerResult<List<UserDiary>> result = new PagerResult<>();
-        result.setData(userDiaries);
+        result.setItems(userDiaries);
         PagingUtil.pagingData(result, totalCount, pageSize, pageNum);
         return result;
     }
 
     @Override
-    public PagerResult<List<UserDiary>> findDiaryByDate(int userId, int pageSize, int pageNum, int year, int month) {
+    public PagerResult<List<UserDiary>> findDiaryByDate(Integer userId, int pageSize, int pageNum, int year, int month) {
         int fromRow = (pageNum - 1) * pageSize;
         String beginTime = Joiner.on("-").join(year, "0" + month);
         String endTime = Joiner.on("-").join(year, "0" + (month + 1));
@@ -43,7 +43,7 @@ public class UserDiaryServiceImpl implements UserDiaryService {
         int totalCount = userDiaryMapper.selectCount(userId, beginTime, endTime);
 
         PagerResult<List<UserDiary>> result = new PagerResult<>();
-        result.setData(userDiaries);
+        result.setItems(userDiaries);
         PagingUtil.pagingData(result, totalCount, pageSize, pageNum);
         return result;
     }
@@ -53,5 +53,10 @@ public class UserDiaryServiceImpl implements UserDiaryService {
         userDiary.setCreateTime(new Date());
         userDiary.setModifyTime(new Date());
         userDiaryMapper.insert(userDiary);
+    }
+
+    @Override
+    public UserDiary findDiaryById(Integer id) {
+        return userDiaryMapper.selectByPrimaryKey(id);
     }
 }

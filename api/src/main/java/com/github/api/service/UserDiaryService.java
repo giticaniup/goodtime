@@ -39,5 +39,9 @@ public interface UserDiaryService {
      */
     void saveUserDiary(UserDiary userDiary);
 
-    UserDiary findDiaryById(Integer id);
+    UserDiary findDiaryById(Long id);
+
+    void updateUserDiary(UserDiary userDiary);
+
+    void deleteUserDiary(Long id);
 }

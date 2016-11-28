@@ -56,7 +56,19 @@ public class UserDiaryServiceImpl implements UserDiaryService {
     }
 
     @Override
-    public UserDiary findDiaryById(Integer id) {
+    public UserDiary findDiaryById(Long id) {
         return userDiaryMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void updateUserDiary(UserDiary userDiary) {
+        userDiary.setModifyTime(new Date());
+        userDiaryMapper.updateByPrimaryKeyWithBLOBs(userDiary);
+    }
+
+    @Override
+    public void deleteUserDiary(Long id) {
+        userDiaryMapper.deleteByPrimaryKey(id);
+    }
+
 }

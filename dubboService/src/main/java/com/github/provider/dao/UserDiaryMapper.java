@@ -12,7 +12,7 @@ public interface UserDiaryMapper {
 
     int insertSelective(UserDiary record);
 
-    UserDiary selectByPrimaryKey(Integer id);
+    UserDiary selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(UserDiary record);
 

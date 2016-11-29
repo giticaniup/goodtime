@@ -113,10 +113,10 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.github.api.entity.UserDiary">
     update user_diary
-    set user_id = #{userId,jdbcType=INTEGER},
+    set
+      user_id = #{userId,jdbcType=INTEGER},
       group_id = #{groupId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
@@ -137,7 +137,7 @@
     <include refid="Blob_Column_List" />
     from user_diary
     where user_id = #{userId,jdbcType=INTEGER}
-    ORDER BY create_time desc limit #{fromRow},#{pageSize}
+    ORDER BY modify_time desc limit #{fromRow},#{pageSize}
   </select>
   <select id="selectByDate" resultMap="ResultMapWithBLOBs">
     select

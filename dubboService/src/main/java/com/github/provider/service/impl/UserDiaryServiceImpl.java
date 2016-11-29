@@ -50,8 +50,6 @@ public class UserDiaryServiceImpl implements UserDiaryService {
 
     @Override
     public void saveUserDiary(UserDiary userDiary) {
-        userDiary.setCreateTime(new Date());
-        userDiary.setModifyTime(new Date());
         userDiaryMapper.insert(userDiary);
     }
 
@@ -62,7 +60,6 @@ public class UserDiaryServiceImpl implements UserDiaryService {
 
     @Override
     public void updateUserDiary(UserDiary userDiary) {
-        userDiary.setModifyTime(new Date());
         userDiaryMapper.updateByPrimaryKeyWithBLOBs(userDiary);
     }
 

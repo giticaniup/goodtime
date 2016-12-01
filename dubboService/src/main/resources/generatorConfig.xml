@@ -12,7 +12,7 @@
       </commentGenerator>
       <jdbcConnection driverClass="com.mysql.jdbc.Driver"
             connectionURL="jdbc:mysql://127.0.0.1/goodtime?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"
-            userId="root" password="">
+            userId="kode" password="">
         </jdbcConnection>
       <javaTypeResolver>
          <property name="forceBigDecimals" value="false"/>
@@ -32,7 +32,7 @@
       </javaClientGenerator>
 <!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
-      <table  tableName="user_diary" domainObjectName="UserDiary" enableCountByExample="false"
+      <table  tableName="diary_group" domainObjectName="DiaryGroup" enableCountByExample="false"
               enableSelectByExample="false"
               enableUpdateByExample="false" enableDeleteByExample="false">      </table>
  	</context>

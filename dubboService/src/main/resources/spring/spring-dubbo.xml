@@ -26,14 +26,14 @@
     <!--DUBBO SERVICE-->
 
 
-    <dubbo:service interface="com.kode.api.DemoService" ref="demoService"/>
     <dubbo:service interface="com.github.api.service.UserInfoService" ref="userInfoService"/>
     <dubbo:service interface="com.github.api.service.UserTaskService" ref="userTaskService"/>
     <dubbo:service interface="com.github.api.service.UserDiaryService" ref="userDiaryService"/>
+    <dubbo:service interface="com.github.api.service.DiaryGroupService" ref="diaryGroupService"/>
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.github.provider,com.kode.impl">
+    <context:component-scan base-package="com.github.provider">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

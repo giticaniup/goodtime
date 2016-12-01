@@ -104,7 +104,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="findDiaryGroupList">
+  <select id="findDiaryGroupList" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM diary_group

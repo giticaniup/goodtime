@@ -68,4 +68,8 @@ public class UserDiaryServiceImpl implements UserDiaryService {
         userDiaryMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public List<UserDiary> getDiaryByGroup(Integer userId, Integer groupId) {
+        return userDiaryMapper.selectByGroupId(userId,groupId);
+    }
 }

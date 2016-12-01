@@ -162,4 +162,14 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByGroupId" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM user_diary
+    WHERE user_id=#{userId} and group_id=#{groupId}
+    ORDER BY modify_time
+  </select>
 </mapper>

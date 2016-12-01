@@ -34,4 +34,6 @@ public interface UserDiaryMapper {
      * @return
      */
     int selectCount(@Param("userId") int userId, @Param("beginTime") String beginTime, @Param("endTime") String endTime);
+
+    List<UserDiary> selectByGroupId(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 }

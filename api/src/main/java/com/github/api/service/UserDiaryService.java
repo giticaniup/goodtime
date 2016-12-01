@@ -44,4 +44,6 @@ public interface UserDiaryService {
     void updateUserDiary(UserDiary userDiary);
 
     void deleteUserDiary(Long id);
+
+    List<UserDiary> getDiaryByGroup(Integer userId,Integer groupId);
 }

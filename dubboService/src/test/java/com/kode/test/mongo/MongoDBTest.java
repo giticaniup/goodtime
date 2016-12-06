@@ -1,7 +1,7 @@
 package com.kode.test.mongo;
 
 import com.github.api.entity.UserMessage;
-import com.github.provider.mongo.impl.MessageDaoImpl;
+import com.github.provider.mongo.impl.UserMessageDaoImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:spring/spring-dubbo.xml")
 public class MongoDBTest {
     @Autowired
-    private MessageDaoImpl messageDao;
+    private UserMessageDaoImpl messageDao;
 
     @Test
     public void testMongo(){

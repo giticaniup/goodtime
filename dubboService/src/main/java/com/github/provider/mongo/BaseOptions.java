@@ -1,6 +1,7 @@
 package com.github.provider.mongo;
 
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,16 @@ public interface BaseOptions<T> {
      * 根据条件查询所有
      */
     List<T> findAllByQuery(Query query);
+
+    /**
+     * 根据条件获取总数量
+     */
+    long findCountByParams(Map<String, Object> params);
+
+    /**
+     * 根据Id修改
+     */
+    void updateById(String id,Map<String, Object> params);
 
     /**
      * 创建表

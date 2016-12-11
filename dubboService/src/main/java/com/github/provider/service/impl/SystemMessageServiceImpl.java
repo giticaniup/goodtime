@@ -8,7 +8,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统消息服务实现类
@@ -16,7 +18,7 @@ import java.util.List;
  */
 
 @Service("systemMessageService")
-public class SystemMessageSerivceImpl implements SystemMessageService {
+public class SystemMessageServiceImpl implements SystemMessageService {
 
     @Autowired
     private SystemMessageDao systemMessageDao;
@@ -36,5 +38,10 @@ public class SystemMessageSerivceImpl implements SystemMessageService {
         Criteria criteria = new Criteria();
         criteria.and("id").is(id);
         systemMessageDao.findOneByQuery(new Query(criteria));
+    }
+
+    @Override
+    public Long findCount() {
+        return systemMessageDao.findCountByParams(null);
     }
 }

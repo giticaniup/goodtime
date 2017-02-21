@@ -1,10 +1,12 @@
 package com.github.provider.mongo.impl;
 
 import com.github.provider.mongo.BaseOptions;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,24 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     public void save(T modelType) {
         createCollection();
         mongoTemplate.save(modelType);
+    }
+
+    /**
+     * 根据Id修改
+     */
+    @Override
+    public void updateById(String id, Map<String, Object> params){
+        if(MapUtils.isNotEmpty(params)){
+            Update update = new Update();
+            for(Map.Entry<String, Object> entry : params.entrySet()){
+                update = update.set(entry.getKey(),entry.getValue());
+            }
+            Query query = new Query();
+            Criteria criteria = Criteria.where("_id").is(id);
+            query.addCriteria(criteria);
+            mongoTemplate.updateFirst(query,update,this.getEntryClass());
+        }
+
     }
 
     /**
@@ -86,6 +106,19 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
         }
         query.addCriteria(criteria);
         return findAllByQuery(query);
+    }
+
+    @Override
+    public long findCountByParams(Map<String, Object> params){
+        Query query = new Query();
+        Criteria criteria = Criteria.where("");
+        if(MapUtils.isNotEmpty(params)){
+            for(Map.Entry<String,Object> entry : params.entrySet()){
+                criteria = Criteria.where(entry.getKey()).is(entry.getValue());
+            }
+        }
+        query.addCriteria(criteria);
+        return mongoTemplate.count(query,this.getEntryClass());
     }
 
     /**

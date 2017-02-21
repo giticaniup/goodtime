@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Service("systemMessageService")
-public class SystemMessageSerivceImpl implements SystemMessageService {
+public class SystemMessageServiceImpl implements SystemMessageService {
 
     @Autowired
     private SystemMessageDao systemMessageDao;
@@ -36,5 +36,10 @@ public class SystemMessageSerivceImpl implements SystemMessageService {
         Criteria criteria = new Criteria();
         criteria.and("id").is(id);
         systemMessageDao.findOneByQuery(new Query(criteria));
+    }
+
+    @Override
+    public Long findCount() {
+        return systemMessageDao.findCountByParams(null);
     }
 }

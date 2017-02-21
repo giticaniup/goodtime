@@ -1,6 +1,7 @@
 package com.github.api.service;
 
 import com.github.api.entity.SystemMessage;
+import com.sun.org.apache.bcel.internal.generic.IINC;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface SystemMessageService {
     List<SystemMessage> getSystemMessage();
 
     void markSystemMessage(Integer id);
+
+    Long findCount();
 }

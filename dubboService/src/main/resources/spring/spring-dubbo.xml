@@ -31,6 +31,7 @@
     <dubbo:service interface="com.github.api.service.UserDiaryService" ref="userDiaryService"/>
     <dubbo:service interface="com.github.api.service.DiaryGroupService" ref="diaryGroupService"/>
     <dubbo:service interface="com.github.api.service.SystemMessageService" ref="systemMessageService"/>
+    <dubbo:service interface="com.github.api.service.ActivityService" ref="activityService"/>
 
     <context:annotation-config/>
 

@@ -29,7 +29,6 @@
         <module>api</module>
         <module>dubboService</module>
         <module>common</module>
-        <module>rocketMQ</module>
     </modules>
     <groupId>com.kode.dubbo</groupId>
     <artifactId>provider</artifactId>

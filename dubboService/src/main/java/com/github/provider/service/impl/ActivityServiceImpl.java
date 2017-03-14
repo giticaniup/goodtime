@@ -13,7 +13,7 @@ import java.util.List;
  * Created by zhongcy on 2017-02-25.
  */
 @Service("activityService")
-public class ActivityServiceImpl implements ActivityService{
+public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityDAO activityDAO;

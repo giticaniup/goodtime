@@ -19,8 +19,8 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityDAO activityDAO;
 
     @Override
-    public List<Activity> listActivity() {
-        return null;
+    public List<Activity> listActivity(String userId) {
+        return activityDAO.listActivityByUserId(userId);
     }
 
     @Override

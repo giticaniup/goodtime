@@ -12,7 +12,7 @@ public interface ActivityService {
     /**
      * 获取所有活动列表
      */
-    List<Activity> listActivity();
+    List<Activity> listActivity(String userId);
 
     /**
      * 根据Id获取详情

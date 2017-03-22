@@ -29,7 +29,6 @@ public class SignUpDAOImpl extends BaseOptionsImpl<SignUpInfo> implements SignUp
         Query query = new Query();
         query.fields().include("name").include("phoneNumber");
         query.addCriteria(Criteria.where("_id").is(activityId));
-        mongoTemplate.find(query, SignUpInfo.class);
-        return null;
+        return mongoTemplate.find(query, String.class);
     }
 }

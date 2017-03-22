@@ -37,4 +37,10 @@ public class ActivityServiceTest {
         Activity activity = activityService.getActivity("58b190d4b917c82d6c73d6e7");
         System.out.println(activity);
     }
+
+    @Test
+    public void testListActivity(){
+        System.out.println(activityService.listActivity("钟乘永"));
+    }
+
 }

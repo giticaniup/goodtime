@@ -27,7 +27,6 @@ public class SignUpServiceImpl implements SignUpService {
     @Autowired
     private SignUpDAO signUpDAO;
 
-
     @Override
     public void signUpActivity(SignUpInfo info) {
         Activity activity = activityDAO.findById(info.getActivityId());

@@ -62,6 +62,7 @@ public class Activity implements Serializable{
      */
     private Date UpdateTime;
 
+
     public String getId() {
 
         return id;

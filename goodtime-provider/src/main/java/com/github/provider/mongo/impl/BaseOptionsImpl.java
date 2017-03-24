@@ -9,11 +9,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
  * 数据基础操作类
@@ -48,16 +49,16 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 根据Id修改
      */
     @Override
-    public void updateById(String id, Map<String, Object> params){
-        if(MapUtils.isNotEmpty(params)){
+    public void updateById(String id, Map<String, Object> params) {
+        if (MapUtils.isNotEmpty(params)) {
             Update update = new Update();
-            for(Map.Entry<String, Object> entry : params.entrySet()){
-                update = update.set(entry.getKey(),entry.getValue());
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                update = update.set(entry.getKey(), entry.getValue());
             }
             Query query = new Query();
             Criteria criteria = where("_id").is(id);
             query.addCriteria(criteria);
-            mongoTemplate.updateFirst(query,update,this.getEntryClass());
+            mongoTemplate.updateFirst(query, update, this.getEntryClass());
         }
 
     }
@@ -66,7 +67,19 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 修改满足条件的第一条数据未实现
      */
     @Override
-    public void updateFirst(T modelType) {
+    public WriteResult updateFirst(T modelType) throws IllegalAccessException {
+        WriteResult writeResult = new WriteResult(0,false,null);
+        Map<String, Object> params = convertParams(modelType);
+        if (params != null && params.get("id") != null) {
+            Update update = new Update();
+            Query query = new Query().addCriteria(Criteria.where("_id").is(params.get("id")));
+            //移除id和serialVersionUID
+            params.remove("id");
+            params.remove("serialVersionUID");
+            params.forEach(update::set);
+            writeResult = mongoTemplate.updateFirst(query, update, this.getEntryClass());
+        }
+        return writeResult;
     }
 
     /**
@@ -113,16 +126,16 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     }
 
     @Override
-    public long findCountByParams(Map<String, Object> params){
+    public long findCountByParams(Map<String, Object> params) {
         Query query = new Query();
         Criteria criteria = where("");
-        if(MapUtils.isNotEmpty(params)){
-            for(Map.Entry<String,Object> entry : params.entrySet()){
+        if (MapUtils.isNotEmpty(params)) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
                 criteria = where(entry.getKey()).is(entry.getValue());
             }
         }
         query.addCriteria(criteria);
-        return mongoTemplate.count(query,this.getEntryClass());
+        return mongoTemplate.count(query, this.getEntryClass());
     }
 
     /**
@@ -159,5 +172,20 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
         if (!mongoTemplate.collectionExists(this.getEntryClass())) {
             mongoTemplate.dropCollection(this.getEntryClass());
         }
+    }
+
+    protected Map<String, Object> convertParams(T modelType) throws IllegalAccessException {
+        Field[] fields = modelType.getClass().getDeclaredFields();
+        if (fields != null) {
+            Map<String, Object> map = new HashMap<>();
+            for (Field field : fields) {
+                field.setAccessible(true);
+                if (field.get(modelType) != null) {
+                    map.put(field.getName(), field.get(modelType));
+                }
+            }
+            return map;
+        }
+        return null;
     }
 }

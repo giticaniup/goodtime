@@ -209,7 +209,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
-
     </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>

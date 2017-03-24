@@ -3,7 +3,7 @@ package com.github.provider.service.impl;
 import com.github.api.entity.Activity;
 import com.github.api.entity.SignUpInfo;
 import com.github.api.service.SignUpService;
-import com.github.common.code.AjaxCode;
+import com.github.common.code.ErrorCode;
 import com.github.common.exception.BizException;
 import com.github.provider.constants.ActivityStatus;
 import com.github.provider.mongo.ActivityDAO;
@@ -31,19 +31,19 @@ public class SignUpServiceImpl implements SignUpService {
     public void signUpActivity(SignUpInfo info) {
         Activity activity = activityDAO.findById(info.getActivityId());
         if (activity == null) {
-            throw new BizException(AjaxCode.PARAM_ERROR, "该活动不存在！");
+            throw new BizException(ErrorCode.PARAM_ERROR, "该活动不存在！");
         }
         if (activity.getStatus() == ActivityStatus.ALREADY_CANCELED.getStatus()) {
-            throw new BizException(AjaxCode.PARAM_ERROR, "该活动已经取消！");
+            throw new BizException(ErrorCode.PARAM_ERROR, "该活动已经取消！");
         }
         if (activity.getStatus() == ActivityStatus.ALREADY_OVER.getStatus()) {
-            throw new BizException(AjaxCode.PARAM_ERROR, "该活动已经结束，下次早点哦！");
+            throw new BizException(ErrorCode.PARAM_ERROR, "该活动已经结束，下次早点哦！");
         }
         Map<String, Object> map = ImmutableMap.<String, Object>builder().put("activityId", info.getActivityId())
                 .put("userId", info.getUserId()).build();
         long count = signUpDAO.findCountByParams(map);
         if (count > 0) {
-            throw new BizException(AjaxCode.PARAM_ERROR, "您已经报名了！");
+            throw new BizException(ErrorCode.PARAM_ERROR, "您已经报名了！");
         }
         signUpDAO.add(info);
     }

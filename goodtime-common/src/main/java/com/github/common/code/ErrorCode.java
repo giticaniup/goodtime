@@ -3,7 +3,7 @@ package com.github.common.code;
 /**
  * 返回页面的请求错误信息，一般 非0表示有异常.
  */
-public interface AjaxCode {
+public interface ErrorCode {
 
     /**
      * 请求处理成功.

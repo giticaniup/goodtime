@@ -1,5 +1,6 @@
 package com.github.provider.mongo;
 
+import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
@@ -34,7 +35,7 @@ public interface BaseOptions<T> {
     /**
      * 根据id删除
      */
-    void delete(String id);
+    WriteResult delete(String id);
 
     /**
      * 根据id获取对象

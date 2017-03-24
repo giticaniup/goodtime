@@ -2,11 +2,17 @@ package com.github.provider.service.impl;
 
 import com.github.api.entity.Activity;
 import com.github.api.service.ActivityService;
+import com.github.common.code.ErrorCode;
+import com.github.common.exception.BizException;
 import com.github.provider.mongo.ActivityDAO;
+import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 活动Service实现类
@@ -35,11 +41,17 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public boolean removeActivity(String id) {
-        return false;
+        WriteResult result = activityDAO.delete(id);
+        if (result.getN() == 0) {
+            throw new BizException(ErrorCode.PARAM_ERROR, "活动已被删除");
+        }
+        return true;
     }
 
     @Override
     public boolean updateActivity(Activity activity) {
-        return false;
+        Map<String,Objects> params = new HashMap<>();
+
+        return true;
     }
 }

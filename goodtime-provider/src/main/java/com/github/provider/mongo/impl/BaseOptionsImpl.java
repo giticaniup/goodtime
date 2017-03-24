@@ -1,6 +1,7 @@
 package com.github.provider.mongo.impl;
 
 import com.github.provider.mongo.BaseOptions;
+import com.mongodb.WriteResult;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +11,9 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
  * 数据基础操作类
@@ -51,7 +55,7 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
                 update = update.set(entry.getKey(),entry.getValue());
             }
             Query query = new Query();
-            Criteria criteria = Criteria.where("_id").is(id);
+            Criteria criteria = where("_id").is(id);
             query.addCriteria(criteria);
             mongoTemplate.updateFirst(query,update,this.getEntryClass());
         }
@@ -76,8 +80,8 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 根据对象中的id删除数据
      */
     @Override
-    public void delete(String id) {
-        mongoTemplate.remove(id);
+    public WriteResult delete(String id) {
+        return mongoTemplate.remove(id);
     }
 
 
@@ -87,7 +91,7 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     @Override
     public T findById(String id) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("_id").is(id);
+        Criteria criteria = where("_id").is(id);
         query.addCriteria(criteria);
         return findOneByQuery(query);
     }
@@ -98,10 +102,10 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     @Override
     public List<T> findByParams(Map<String, Object> params) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("");
+        Criteria criteria = where("");
         if (params != null) {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
-                criteria = Criteria.where(entry.getKey()).is(entry.getValue());
+                criteria = where(entry.getKey()).is(entry.getValue());
             }
         }
         query.addCriteria(criteria);
@@ -111,10 +115,10 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     @Override
     public long findCountByParams(Map<String, Object> params){
         Query query = new Query();
-        Criteria criteria = Criteria.where("");
+        Criteria criteria = where("");
         if(MapUtils.isNotEmpty(params)){
             for(Map.Entry<String,Object> entry : params.entrySet()){
-                criteria = Criteria.where(entry.getKey()).is(entry.getValue());
+                criteria = where(entry.getKey()).is(entry.getValue());
             }
         }
         query.addCriteria(criteria);

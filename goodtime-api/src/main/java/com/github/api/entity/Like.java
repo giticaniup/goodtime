@@ -15,6 +15,11 @@ public class Like implements Serializable {
     private static final long serialVersionUID = 4680525788796670118L;
 
     /**
+     * 活动Id
+     */
+    private String activityId;
+
+    /**
      * 用户Id
      */
     private String userId;

@@ -29,7 +29,7 @@ public class LikeTest {
     @Test
     public void testSaveLike(){
         Like like = new Like();
-        like.setActivityId("58b190d4b917c82d6c73d6e7");
+        like.setActivityId("58d733454fd71033f4d264d8");
         like.setLikeTime(System.currentTimeMillis());
         like.setUserId("zhongcy");
         like.setUserName("zhongcy");

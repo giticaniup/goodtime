@@ -28,7 +28,7 @@ public class ActivityServiceTest {
         activity.setContent("测试内容");
         activity.setCreateTime(new Date());
         activity.setImageUrl(imageUrl);
-        activity.setCreator("钟乘永");
+        activity.setCreator("zhongcy");
         activityService.saveActivity(activity);
     }
 

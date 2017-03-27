@@ -68,7 +68,7 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      */
     @Override
     public WriteResult updateFirst(T modelType) throws IllegalAccessException {
-        WriteResult writeResult = new WriteResult(0,false,null);
+        WriteResult writeResult = new WriteResult(0, false, null);
         Map<String, Object> params = convertParams(modelType);
         if (params != null && params.get("id") != null) {
             Update update = new Update();
@@ -174,7 +174,7 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
         }
     }
 
-    protected Map<String, Object> convertParams(T modelType) throws IllegalAccessException {
+    private Map<String, Object> convertParams(T modelType) throws IllegalAccessException {
         Field[] fields = modelType.getClass().getDeclaredFields();
         if (fields != null) {
             Map<String, Object> map = new HashMap<>();
@@ -187,5 +187,16 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
             return map;
         }
         return null;
+    }
+
+    @Override
+    public WriteResult deleteByParams(Map<String, Object> params) {
+        Query query = new Query();
+        Criteria criteria = where("");
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            criteria = where(entry.getKey()).is(entry.getValue());
+        }
+        query.addCriteria(criteria);
+        return mongoTemplate.remove(query, this.getEntryClass());
     }
 }

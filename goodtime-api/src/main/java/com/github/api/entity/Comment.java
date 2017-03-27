@@ -25,5 +25,4 @@ public class Comment implements Serializable {
 
     private Date date;
 
-    private List<Reply> replys;
 }

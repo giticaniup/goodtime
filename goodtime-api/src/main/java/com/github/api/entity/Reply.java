@@ -21,6 +21,11 @@ public class Reply implements Serializable{
     private String id;
 
     /**
+     * 评论Id
+     */
+    private String commentId;
+
+    /**
      * 评论发出者，不能为空
      */
     private String fromUser;

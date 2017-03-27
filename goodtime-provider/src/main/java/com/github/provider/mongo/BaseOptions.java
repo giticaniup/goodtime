@@ -75,4 +75,9 @@ public interface BaseOptions<T> {
      * 删除表
      */
     void dropCollection();
+
+    /**
+     * 根据条件删除
+     */
+    WriteResult deleteByParams(Map<String,Object> params);
 }

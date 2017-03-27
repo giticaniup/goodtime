@@ -84,8 +84,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         //throw new RuntimeException();
         return userMapper.insert(user);
     }
+
     @Override
-    public int delete(){
+    public int delete() {
         return userMapper.deleteByPrimaryKey(4);
     }
 

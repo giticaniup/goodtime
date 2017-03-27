@@ -5,6 +5,6 @@ import com.github.api.entity.Comment;
 /**
  * 评论DAO
  */
-public interface CommentDAO extends BaseOptions<Comment>{
+public interface CommentDAO extends BaseOptions<Comment> {
 
 }

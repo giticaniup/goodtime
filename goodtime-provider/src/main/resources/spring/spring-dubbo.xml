@@ -34,7 +34,6 @@
     <dubbo:service interface="com.github.api.service.ActivityService" ref="activityService"/>
     <dubbo:service interface="com.github.api.service.SignUpService" ref="signUpService"/>
     <dubbo:service interface="com.github.api.service.CommentService" ref="commentService"/>
-    <dubbo:service interface="com.github.api.service.ReplyService" ref="replyService"/>
 
     <context:annotation-config/>
 

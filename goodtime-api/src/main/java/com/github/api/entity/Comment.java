@@ -1,11 +1,9 @@
 package com.github.api.entity;
 
-import com.google.common.base.MoreObjects;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 评论
@@ -15,14 +13,33 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = 7279435189529787706L;
 
+    /**
+     * 评论Id
+     */
     private String id;
 
-    private String userId;
+    /**
+     * 评论发出者
+     */
+    private String fromUser;
 
-    private String activityId;
+    /**
+     * 评论接收者
+     */
+    private String toUser;
 
+    /**
+     * 评论Target
+     */
+    private String targetId;
+
+    /**
+     * 评论内容
+     */
     private String content;
 
+    /**
+     * 评论日期
+     */
     private Date date;
-
 }

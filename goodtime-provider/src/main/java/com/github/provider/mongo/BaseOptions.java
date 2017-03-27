@@ -79,5 +79,5 @@ public interface BaseOptions<T> {
     /**
      * 根据条件删除
      */
-    WriteResult deleteByParams(Map<String,Object> params);
+    WriteResult deleteByParams(Map<String, Object> params);
 }

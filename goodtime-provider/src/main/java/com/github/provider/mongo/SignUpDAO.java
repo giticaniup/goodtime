@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 报名DAO
  */
-public interface SignUpDAO extends BaseOptions<SignUpInfo>{
+public interface SignUpDAO extends BaseOptions<SignUpInfo> {
     /**
      * 所有报名人员
      */

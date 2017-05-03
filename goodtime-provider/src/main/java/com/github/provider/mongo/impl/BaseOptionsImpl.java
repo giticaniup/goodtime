@@ -1,6 +1,7 @@
 package com.github.provider.mongo.impl;
 
 import com.github.provider.mongo.BaseOptions;
+import com.mongodb.WriteResult;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -8,8 +9,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 /**
  * 数据基础操作类
@@ -44,16 +49,16 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 根据Id修改
      */
     @Override
-    public void updateById(String id, Map<String, Object> params){
-        if(MapUtils.isNotEmpty(params)){
+    public void updateById(String id, Map<String, Object> params) {
+        if (MapUtils.isNotEmpty(params)) {
             Update update = new Update();
-            for(Map.Entry<String, Object> entry : params.entrySet()){
-                update = update.set(entry.getKey(),entry.getValue());
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                update = update.set(entry.getKey(), entry.getValue());
             }
             Query query = new Query();
-            Criteria criteria = Criteria.where("_id").is(id);
+            Criteria criteria = where("_id").is(id);
             query.addCriteria(criteria);
-            mongoTemplate.updateFirst(query,update,this.getEntryClass());
+            mongoTemplate.updateFirst(query, update, this.getEntryClass());
         }
 
     }
@@ -62,7 +67,19 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 修改满足条件的第一条数据未实现
      */
     @Override
-    public void updateFirst(T modelType) {
+    public WriteResult updateFirst(T modelType) throws IllegalAccessException {
+        WriteResult writeResult = new WriteResult(0, false, null);
+        Map<String, Object> params = convertParams(modelType);
+        if (params != null && params.get("id") != null) {
+            Update update = new Update();
+            Query query = new Query().addCriteria(Criteria.where("_id").is(params.get("id")));
+            //移除id和serialVersionUID
+            params.remove("id");
+            params.remove("serialVersionUID");
+            params.forEach(update::set);
+            writeResult = mongoTemplate.updateFirst(query, update, this.getEntryClass());
+        }
+        return writeResult;
     }
 
     /**
@@ -76,8 +93,8 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
      * 根据对象中的id删除数据
      */
     @Override
-    public void delete(String id) {
-        mongoTemplate.remove(id);
+    public WriteResult delete(String id) {
+        return mongoTemplate.remove(id);
     }
 
 
@@ -87,7 +104,7 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     @Override
     public T findById(String id) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("_id").is(id);
+        Criteria criteria = where("_id").is(id);
         query.addCriteria(criteria);
         return findOneByQuery(query);
     }
@@ -98,10 +115,10 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     @Override
     public List<T> findByParams(Map<String, Object> params) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("");
+        Criteria criteria = where("");
         if (params != null) {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
-                criteria = Criteria.where(entry.getKey()).is(entry.getValue());
+                criteria = where(entry.getKey()).is(entry.getValue());
             }
         }
         query.addCriteria(criteria);
@@ -109,16 +126,16 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
     }
 
     @Override
-    public long findCountByParams(Map<String, Object> params){
+    public long findCountByParams(Map<String, Object> params) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("");
-        if(MapUtils.isNotEmpty(params)){
-            for(Map.Entry<String,Object> entry : params.entrySet()){
-                criteria = Criteria.where(entry.getKey()).is(entry.getValue());
+        Criteria criteria = where("");
+        if (MapUtils.isNotEmpty(params)) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                criteria = where(entry.getKey()).is(entry.getValue());
             }
         }
         query.addCriteria(criteria);
-        return mongoTemplate.count(query,this.getEntryClass());
+        return mongoTemplate.count(query, this.getEntryClass());
     }
 
     /**
@@ -155,5 +172,31 @@ public abstract class BaseOptionsImpl<T> implements BaseOptions<T> {
         if (!mongoTemplate.collectionExists(this.getEntryClass())) {
             mongoTemplate.dropCollection(this.getEntryClass());
         }
+    }
+
+    private Map<String, Object> convertParams(T modelType) throws IllegalAccessException {
+        Field[] fields = modelType.getClass().getDeclaredFields();
+        if (fields != null) {
+            Map<String, Object> map = new HashMap<>();
+            for (Field field : fields) {
+                field.setAccessible(true);
+                if (field.get(modelType) != null) {
+                    map.put(field.getName(), field.get(modelType));
+                }
+            }
+            return map;
+        }
+        return null;
+    }
+
+    @Override
+    public WriteResult deleteByParams(Map<String, Object> params) {
+        Query query = new Query();
+        Criteria criteria = where("");
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            criteria = where(entry.getKey()).is(entry.getValue());
+        }
+        query.addCriteria(criteria);
+        return mongoTemplate.remove(query, this.getEntryClass());
     }
 }

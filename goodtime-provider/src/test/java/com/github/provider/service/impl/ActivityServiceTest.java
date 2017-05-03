@@ -28,7 +28,7 @@ public class ActivityServiceTest {
         activity.setContent("测试内容");
         activity.setCreateTime(new Date());
         activity.setImageUrl(imageUrl);
-        activity.setCreator("钟乘永");
+        activity.setCreator("zhongcy");
         activityService.saveActivity(activity);
     }
 
@@ -43,4 +43,11 @@ public class ActivityServiceTest {
         System.out.println(activityService.listActivity("钟乘永"));
     }
 
+    @Test
+    public void updateActivity() throws IllegalAccessException {
+        Activity activity = new Activity();
+        activity.setId("58b3d39b03d7f52858209b9e");
+        activity.setTitle("修改测试");
+        activityService.updateActivity(activity);
+    }
 }

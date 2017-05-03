@@ -28,6 +28,7 @@ public interface UserDiaryMapper {
 
     /**
      * 查询符合条件的日志数量
+     *
      * @param userId    userId
      * @param beginTime 开始时间，选填
      * @param endTime   结束时间，选填

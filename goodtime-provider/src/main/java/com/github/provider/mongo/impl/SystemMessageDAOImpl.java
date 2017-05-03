@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Created by zhongcy on 16-12-5.
  */
 @Repository
-public class SystemMessageDaoImpl extends BaseOptionsImpl<SystemMessage> implements SystemMessageDao{
+public class SystemMessageDAOImpl extends BaseOptionsImpl<SystemMessage> implements SystemMessageDao {
     @Override
     protected Class<SystemMessage> getEntryClass() {
         return SystemMessage.class;

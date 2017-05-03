@@ -15,7 +15,7 @@ import java.util.List;
  * Created by zhongcy on 2017-02-25.
  */
 @Repository
-public class ActivityDAOImpl extends BaseOptionsImpl<Activity> implements ActivityDAO{
+public class ActivityDAOImpl extends BaseOptionsImpl<Activity> implements ActivityDAO {
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -28,6 +28,6 @@ public class ActivityDAOImpl extends BaseOptionsImpl<Activity> implements Activi
     @Override
     public List<Activity> listActivityByUserId(String userId) {
         Query query = new Query().addCriteria(Criteria.where("creator").is(userId));
-        return mongoTemplate.find(query,Activity.class);
+        return mongoTemplate.find(query, Activity.class);
     }
 }

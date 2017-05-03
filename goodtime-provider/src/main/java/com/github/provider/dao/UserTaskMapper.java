@@ -3,7 +3,6 @@ package com.github.provider.dao;
 import com.github.api.entity.UserTask;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface UserTaskMapper {

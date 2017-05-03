@@ -1,7 +1,7 @@
 package com.github.provider.mongo;
 
+import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public interface BaseOptions<T> {
     /**
      * 修改满足条件的第一条记录
      */
-    void updateFirst(T modelType);
+    WriteResult updateFirst(T modelType) throws IllegalAccessException;
 
     /**
      * 修改
@@ -34,7 +34,7 @@ public interface BaseOptions<T> {
     /**
      * 根据id删除
      */
-    void delete(String id);
+    WriteResult delete(String id);
 
     /**
      * 根据id获取对象
@@ -64,7 +64,7 @@ public interface BaseOptions<T> {
     /**
      * 根据Id修改
      */
-    void updateById(String id,Map<String, Object> params);
+    void updateById(String id, Map<String, Object> params);
 
     /**
      * 创建表
@@ -75,4 +75,9 @@ public interface BaseOptions<T> {
      * 删除表
      */
     void dropCollection();
+
+    /**
+     * 根据条件删除
+     */
+    WriteResult deleteByParams(Map<String, Object> params);
 }

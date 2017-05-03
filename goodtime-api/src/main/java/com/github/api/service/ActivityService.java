@@ -19,9 +19,24 @@ public interface ActivityService {
      */
     Activity getActivity(String id);
 
+    /**
+     * 添加活动
+     * @param activity 活动
+     */
     void saveActivity(Activity activity);
 
+    /**
+     * 删除活动
+     * @param id 活动id
+     * @return 是否删除成功
+     */
     boolean removeActivity(String id);
 
-    boolean updateActivity(Activity activity);
+    /**
+     * 更新活动
+     * @param activity 活动
+     * @return 是否更新成功
+     * @throws IllegalAccessException 反射异常
+     */
+    boolean updateActivity(Activity activity) throws IllegalAccessException;
 }

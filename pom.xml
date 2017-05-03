@@ -344,6 +344,20 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.4</version>
             </dependency>
+
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.16</version>
+            </dependency>
+
+            <!--netty-->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>4.0.32.Final</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

@@ -9,7 +9,6 @@ import com.google.common.base.Joiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,6 +69,6 @@ public class UserDiaryServiceImpl implements UserDiaryService {
 
     @Override
     public List<UserDiary> getDiaryByGroup(Integer userId, Integer groupId) {
-        return userDiaryMapper.selectByGroupId(userId,groupId);
+        return userDiaryMapper.selectByGroupId(userId, groupId);
     }
 }

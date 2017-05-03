@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-/**定时任务做数据索引
+/**
+ * 定时任务做数据索引
  * 功能暂缺
  * Created by zhongcy on 2016/7/26.
  */
@@ -19,8 +20,8 @@ public class DataIndex {
     @Autowired
     private Configuration configuration;
 
-    @Scheduled(cron="0/5 * * * * ?")
-    public void indexData(){
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void indexData() {
         logger.error(configuration.getSolrUrl());
         logger.error("test");
     }
